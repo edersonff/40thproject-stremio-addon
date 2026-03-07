@@ -36,7 +36,9 @@ def build_manifest() -> dict:
         "background": "https://40thproject.ai/static/images/download/servers/40thproject.png",
         "contactEmail": "ederr@ederr.com",
         "resources": [{"name": "stream", "types": ["series"], "idPrefixes": ["tt"]}],
+        "types": ["series"],
         "catalogs": [],
+        "idPrefixes": ["tt"],
         "behaviorHints": {
             "adult": False,
             "p2p": False,
