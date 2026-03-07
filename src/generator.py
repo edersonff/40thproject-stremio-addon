@@ -57,14 +57,12 @@ def build_stream(episode: ScrapedEpisode, series_key: str) -> dict:
                 "name": ADDON_NAME,
                 "title": f"{STREAM_RESOLUTION} NTSC {STREAM_FPS}fps",
                 "description": f"NTSC {STREAM_FPS}fps | {STREAM_RESOLUTION}\n"
-                f"~6GB\n"
+                f"~6GB MKV\n"
                 f"{template['name']} Ep.{episode.episode_number:02d}",
                 "behaviorHints": {
-                    "notWebReady": True,
-                    "videoSize": VIDEO_SIZE_APPROX,
-                    "filename": f"{template['name']}.{episode.episode_number:02d}.40th.PROJECT.{STREAM_RESOLUTION}.mkv",
                     "bingeGroup": f"40thproject-{series_key}",
-                    "proxyHeaders": {"request": REFERER_HEADER},
+                    "filename": f"{template['name']}.{episode.episode_number:02d}.40th.PROJECT.{STREAM_RESOLUTION}.mkv",
+                    "videoSize": VIDEO_SIZE_APPROX,
                 },
             }
         ]
