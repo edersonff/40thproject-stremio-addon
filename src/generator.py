@@ -32,19 +32,13 @@ def build_manifest() -> dict:
         "version": ADDON_VERSION,
         "name": ADDON_NAME,
         "description": ADDON_DESCRIPTION,
-        "logo": "https://40thproject.ai/static/images/logo-meta.png",
-        "background": "https://40thproject.ai/static/images/logo-meta.png",
-        "resources": ["catalog", "stream", "meta"],
+        "logo": "https://40thproject.ai/static/images/download/servers/40thproject.png",
+        "background": "https://40thproject.ai/static/images/download/servers/40thproject.png",
+        "contactEmail": "ederr@ederr.com",
+        "resources": ["stream"],
         "types": ["series"],
-        "catalogs": [
-            {
-                "type": "series",
-                "id": "40thproject",
-                "name": ADDON_NAME,
-                "extra": [{"name": "search", "isRequired": False}],
-            }
-        ],
-        "idPrefixes": ["40th_"],
+        "catalogs": [],
+        "idPrefixes": ["tt"],
         "behaviorHints": {
             "adult": False,
             "p2p": False,
@@ -125,27 +119,15 @@ def generate_addon_files(
     episodes_by_series: Dict[str, List[ScrapedEpisode]], output_dir: str = "dist"
 ) -> None:
     ensure_dir(output_dir)
-    ensure_dir(f"{output_dir}/catalog/series")
     ensure_dir(f"{output_dir}/stream/series")
-    ensure_dir(f"{output_dir}/meta/series")
 
     write_json(f"{output_dir}/manifest.json", build_manifest())
-
-    write_json(
-        f"{output_dir}/catalog/series/40thproject.json",
-        build_catalog_metas(episodes_by_series),
-    )
 
     for series_key, episodes in episodes_by_series.items():
         if not episodes:
             continue
 
         template = SERIES_TEMPLATES[series_key]
-
-        write_json(
-            f"{output_dir}/meta/series/{template['id']}.json",
-            build_series_meta(series_key, episodes),
-        )
 
         for episode in episodes:
             stream_id = f"{template['id']}:1:{episode.episode_number}"
