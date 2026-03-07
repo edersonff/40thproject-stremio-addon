@@ -21,7 +21,7 @@ DOWNLOAD_BASE_URL = "https://downloads.40thproject.ai/api/public/dl/"
 REFERER_HEADER = {"Referer": "https://40thproject.ai/"}
 
 ADDON_ID = "ai.40thproject.stremio"
-ADDON_VERSION = "1.0.0"
+ADDON_VERSION = "1.1.0"
 ADDON_NAME = "40th PROJECT"
 ADDON_DESCRIPTION = "Dragon Ball remastered in high quality - 1080p NTSC 23.976fps"
 
