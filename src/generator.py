@@ -50,10 +50,11 @@ def build_manifest() -> dict:
 
 def build_stream(episode: ScrapedEpisode, series_key: str) -> dict:
     template = SERIES_TEMPLATES[series_key]
+    download_url = f"{DOWNLOAD_BASE_URL}{episode.download_id}"
     return {
         "streams": [
             {
-                "url": f"{DOWNLOAD_BASE_URL}{episode.download_id}",
+                "url": download_url,
                 "name": ADDON_NAME,
                 "title": f"{STREAM_RESOLUTION} NTSC {STREAM_FPS}fps",
                 "description": f"NTSC {STREAM_FPS}fps | {STREAM_RESOLUTION}\n"
@@ -64,7 +65,20 @@ def build_stream(episode: ScrapedEpisode, series_key: str) -> dict:
                     "filename": f"{template['name']}.{episode.episode_number:02d}.40th.PROJECT.{STREAM_RESOLUTION}.mkv",
                     "videoSize": VIDEO_SIZE_APPROX,
                 },
-            }
+            },
+            {
+                "externalUrl": download_url,
+                "name": ADDON_NAME,
+                "title": f"{STREAM_RESOLUTION} NTSC {STREAM_FPS}fps",
+                "description": f"NTSC {STREAM_FPS}fps | {STREAM_RESOLUTION}\n"
+                f"~6GB MKV\n"
+                f"{template['name']} Ep.{episode.episode_number:02d}",
+                "behaviorHints": {
+                    "bingeGroup": f"40thproject-{series_key}-ext",
+                    "filename": f"{template['name']}.{episode.episode_number:02d}.40th.PROJECT.{STREAM_RESOLUTION}.mkv",
+                    "videoSize": VIDEO_SIZE_APPROX,
+                },
+            },
         ]
     }
 
