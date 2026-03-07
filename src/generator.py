@@ -61,6 +61,7 @@ def build_stream(episode: ScrapedEpisode, series_key: str) -> dict:
                 f"~6GB MKV\n"
                 f"{template['name']} Ep.{episode.episode_number:02d}",
                 "behaviorHints": {
+                    "notWebReady": True,
                     "bingeGroup": f"40thproject-{series_key}",
                     "filename": f"{template['name']}.{episode.episode_number:02d}.40th.PROJECT.{STREAM_RESOLUTION}.mkv",
                     "videoSize": VIDEO_SIZE_APPROX,
