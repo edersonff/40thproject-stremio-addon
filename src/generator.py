@@ -35,7 +35,7 @@ def build_manifest() -> dict:
         "logo": "https://40thproject.ai/static/images/download/servers/40thproject.png",
         "background": "https://40thproject.ai/static/images/download/servers/40thproject.png",
         "contactEmail": "ederr@ederr.com",
-        "resources": ["stream"],
+        "resources": [{"name": "stream", "types": ["series"], "idPrefixes": ["tt"]}],
         "types": ["series"],
         "catalogs": [],
         "idPrefixes": ["tt"],
