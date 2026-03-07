@@ -46,50 +46,6 @@ def build_manifest() -> dict:
     }
 
 
-def build_catalog_metas(episodes_by_series: Dict[str, List[ScrapedEpisode]]) -> dict:
-    metas = []
-    for key, template in SERIES_TEMPLATES.items():
-        if key in episodes_by_series and episodes_by_series[key]:
-            metas.append(
-                {
-                    "id": template["id"],
-                    "type": "series",
-                    "name": template["name"],
-                    "poster": template["poster"],
-                    "background": template["poster"],
-                    "description": f"{template['name']} remastered - {STREAM_RESOLUTION} NTSC {STREAM_FPS}fps",
-                }
-            )
-    return {"metas": metas}
-
-
-def build_series_meta(series_key: str, episodes: List[ScrapedEpisode]) -> dict:
-    template = SERIES_TEMPLATES[series_key]
-    videos = [
-        {
-            "id": f"{template['id']}:1:{ep.episode_number}",
-            "title": f"Episode {ep.episode_number}",
-            "season": 1,
-            "episode": ep.episode_number,
-        }
-        for ep in sorted(episodes, key=lambda x: x.episode_number)
-    ]
-
-    return {
-        "meta": {
-            "id": template["id"],
-            "type": "series",
-            "name": template["name"],
-            "poster": template["poster"],
-            "background": template["poster"],
-            "description": f"{template['name']} remastered by 40th PROJECT.\n\n"
-            f"Quality: {STREAM_RESOLUTION} NTSC {STREAM_FPS}fps\n"
-            f"Episodes: {len(episodes)}",
-            "videos": videos,
-        }
-    }
-
-
 def build_stream(episode: ScrapedEpisode, series_key: str) -> dict:
     template = SERIES_TEMPLATES[series_key]
     return {
@@ -121,6 +77,7 @@ def generate_addon_files(
 
     write_json(f"{output_dir}/manifest.json", build_manifest())
 
+    total_files = 0
     for series_key, episodes in episodes_by_series.items():
         if not episodes:
             continue
@@ -128,12 +85,19 @@ def generate_addon_files(
         template = SERIES_TEMPLATES[series_key]
 
         for episode in episodes:
-            stream_id = f"{template['id']}:1:{episode.episode_number}"
-            write_json(
-                f"{output_dir}/stream/series/{stream_id}.json",
-                build_stream(episode, series_key),
-            )
+            stream_data = build_stream(episode, series_key)
+            for series_id in template["ids"]:
+                stream_id = f"{series_id}:1:{episode.episode_number}"
+                write_json(
+                    f"{output_dir}/stream/series/{stream_id}.json",
+                    stream_data,
+                )
+                total_files += 1
 
     print(f"Generated addon files in {output_dir}/")
     for key, eps in episodes_by_series.items():
-        print(f"  {SERIES_TEMPLATES[key]['name']}: {len(eps)} episodes")
+        ids_count = len(SERIES_TEMPLATES[key]["ids"])
+        print(
+            f"  {SERIES_TEMPLATES[key]['name']}: {len(eps)} episodes x {ids_count} IDs = {len(eps) * ids_count} files"
+        )
+    print(f"Total stream files: {total_files}")

@@ -27,12 +27,12 @@ ADDON_DESCRIPTION = "Dragon Ball remastered in high quality - 1080p NTSC 23.976f
 
 SERIES_TEMPLATES = {
     "db": {
-        "id": "tt0280249",
+        "ids": ["tt0088509", "tt0280249"],
         "name": "Dragon Ball",
         "poster": "https://40thproject.ai/static/images/db_logos/db.png",
     },
     "dbz": {
-        "id": "tt0214341",
+        "ids": ["tt0121220", "tt0214341"],
         "name": "Dragon Ball Z",
         "poster": "https://40thproject.ai/static/images/db_logos/dbz.png",
     },
