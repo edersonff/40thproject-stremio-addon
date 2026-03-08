@@ -19,11 +19,11 @@ A Stremio addon that provides Dragon Ball and Dragon Ball Z episodes from the 40
 ## How it works
 
 The addon is **static** - no server required:
-1. Python script scrapes the 40th PROJECT website
+1. Python script scrapes the 40th PROJECT website daily
 2. Generates JSON files for each episode
 3. Deploys to GitHub Pages
 4. Stremio fetches these JSON files directly
-5. `proxyHeaders` with `Referer: https://40thproject.ai/` allows Stremio's streaming server to handle video requests
+5. Videos stream directly from 40th PROJECT servers
 
 ## Stack
 
