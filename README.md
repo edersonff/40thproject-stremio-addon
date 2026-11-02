@@ -1,6 +1,6 @@
 # 40th PROJECT Stremio Addon
 
-A community-maintained Stremio addon that provides access to the [40th PROJECT](https://40thproject.ai) Dragon Ball restoration project.
+A community-maintained Stremio addon that provides access to the [40th PROJECT](https://40thproject.com) Dragon Ball restoration project.
 
 ## Disclaimer
 

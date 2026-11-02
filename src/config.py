@@ -16,9 +16,9 @@ class Series:
     episodes: List[Episode]
 
 
-SOURCE_URL = "https://40thproject.ai"
-DOWNLOAD_BASE_URL = "https://downloads.40thproject.ai/api/public/dl/"
-REFERER_HEADER = {"Referer": "https://40thproject.ai/"}
+SOURCE_URL = "https://40thproject.com"
+DOWNLOAD_BASE_URL = "https://download.40thproject.com/api/public/dl/"
+REFERER_HEADER = {"Referer": "https://40thproject.com/"}
 
 ADDON_ID = "ai.40thproject.stremio"
 ADDON_VERSION = "1.1.0"
@@ -29,12 +29,12 @@ SERIES_TEMPLATES = {
     "db": {
         "ids": ["tt0088509", "tt0280249"],
         "name": "Dragon Ball",
-        "poster": "https://40thproject.ai/static/images/db_logos/db.png",
+        "poster": "https://40thproject.com/static/images/db_logos/db.png",
     },
     "dbz": {
         "ids": ["tt0121220", "tt0214341"],
         "name": "Dragon Ball Z",
-        "poster": "https://40thproject.ai/static/images/db_logos/dbz.png",
+        "poster": "https://40thproject.com/static/images/db_logos/dbz.png",
     },
 }
 
